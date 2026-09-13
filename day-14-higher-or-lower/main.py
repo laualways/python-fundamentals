@@ -16,7 +16,9 @@ while game_on:
     print(vs)
     print(forma_data(random_two, "Against B"))
     question = input("Who has more followers? Type 'A' or 'B':   ").lower()
-
+    print("\n" * 20)
+    print(logo)     
+    
     if question == "a":
         if random_one['follower_count'] > random_two['follower_count']:
             random_one = random_two
