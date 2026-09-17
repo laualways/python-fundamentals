@@ -3,6 +3,7 @@ from game_data import MENU, resources
 espresso_cost = MENU['espresso']['cost']
 latte_cost = MENU['latte']['cost']
 cappuccino_cost = MENU['cappuccino']['cost']
+profit = 0
 
 coffe_machine_on = True
 
@@ -31,14 +32,20 @@ while coffe_machine_on:
             if payment - espresso_cost >= 0:
                 resources['water'] -= MENU['espresso']['ingredients']['water']
                 resources['coffee'] -= MENU['espresso']['ingredients']['coffee']
-                remainder_payment = payment - espresso_cost
+                remainder_payment = round(payment - espresso_cost, 2)
                 print(f"This is your remainder: ${remainder_payment}")
                 print("Enjoy your espresso!")
+                profit += espresso_cost
             else:
                 print("Sorry that's not enough money. Money refunded.")
-
         else:
-            print("Sorry you do not have enough resources.")
+            if resources['water'] < MENU['espresso']['ingredients']['water']:
+                print("Sorry you do not have enough water.")
+            elif resources['coffee'] < MENU['espresso']['ingredients']['coffee']:
+                print("Sorry you do not have enough coffee.")
+            elif resources['milk'] < MENU['espresso']['ingredients']['milk']:
+                print("Sorry you do not have enough milk.")
+
 
     if drink_choice == "latte":
         # water_resources = resources['water']
@@ -50,13 +57,19 @@ while coffe_machine_on:
                 resources['water'] -= MENU['latte']['ingredients']['water']
                 resources['coffee'] -= MENU['latte']['ingredients']['coffee']
                 resources['milk'] -= MENU['latte']['ingredients']['milk']
-                remainder_payment = payment - latte_cost
+                remainder_payment = round(payment - latte_cost, 2)
                 print(f"This is your remainder: ${remainder_payment}")
                 print("Enjoy your latte!")
+                profit += latte_cost
             else:
                 print("Sorry that's not enough money. Money refunded.")
         else:
-            print("Sorry you do not have enough resources.")
+            if resources['water'] < MENU['latte']['ingredients']['water']:
+                print("Sorry you do not have enough water.")
+            elif resources['coffee'] < MENU['latte']['ingredients']['coffee']:
+                print("Sorry you do not have enough coffee.")
+            elif resources['milk'] < MENU['latte']['ingredients']['milk']:
+                print("Sorry you do not have enough milk.")
 
     if drink_choice == "cappuccino":
         # water_resources = resources['water']
@@ -68,13 +81,19 @@ while coffe_machine_on:
                 resources['water'] -= MENU['cappuccino']['ingredients']['water']
                 resources['coffee'] -= MENU['cappuccino']['ingredients']['coffee']
                 resources['milk'] -= MENU['cappuccino']['ingredients']['milk']
-                remainder_payment = payment - cappuccino_cost
+                remainder_payment = round(payment - cappuccino_cost, 2)
                 print(f"This is your remainder: ${remainder_payment}")
                 print("Enjoy your cappuccino!")
+                profit += cappuccino_cost
             else:
                 print("Sorry that's not enough money. Money refunded.")
         else:
-            print("Sorry you do not have enough resources.")
+            if resources['water'] < MENU['cappuccino']['ingredients']['water']:
+                print("Sorry you do not have enough water.")
+            elif resources['coffee'] < MENU['cappuccino']['ingredients']['coffee']:
+                print("Sorry you do not have enough coffee.")
+            elif resources['milk'] < MENU['cappuccino']['ingredients']['milk']:
+                print("Sorry you do not have enough milk.")
 
 
     if drink_choice == "off":
@@ -87,7 +106,4 @@ while coffe_machine_on:
         for items in resources:
             reso += f"{items.title()} : {resources[items]} \n "
         print(f"You still have: \n {reso}")
-
-
-
-
+        print(f"Money: ${profit}")
