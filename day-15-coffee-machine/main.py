@@ -99,11 +99,8 @@ while coffe_machine_on:
     if drink_choice == "off":
         coffe_machine_on = False
         print("You turned off the coffee machine.")
-
-
-    if drink_choice == "report":
-        reso = ""
-        for items in resources:
-            reso += f"{items.title()} : {resources[items]} \n "
-        print(f"You still have: \n {reso}")
+    elif drink_choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}ml")
         print(f"Money: ${profit}")
